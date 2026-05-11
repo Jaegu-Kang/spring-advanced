@@ -15,7 +15,7 @@ class PasswordEncoderTest {
 
     @Test
     void matches_메서드가_정상적으로_동작한다() {
-        // given: 비밀번호와 이를 암호화한 비빌번호가 주어짐
+        // given: 비밀번호와 이를 암호화한 비밀번호가 주어짐
         String rawPassword = "testPassword";
         String encodedPassword = passwordEncoder.encode(rawPassword);
 
