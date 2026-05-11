@@ -54,7 +54,7 @@ class ManagerServiceTest {
 
     @Test
     void todo의_user가_null인_경우_예외가_발생한다() {
-        // given
+        // given: 등록요청을 준비하고,null로 세팅
         AuthUser authUser = new AuthUser(1L, "a@a.com", UserRole.USER);
         long todoId = 1L;
         long managerUserId = 2L;
@@ -66,11 +66,12 @@ class ManagerServiceTest {
 
         given(todoRepository.findById(todoId)).willReturn(Optional.of(todo));
 
-        // when & then
+        // when: managerService.saveManager 호출 시, 의도한 비즈니스 예외(InvalidRequestException)가 터지는지 대기.
         InvalidRequestException exception = assertThrows(InvalidRequestException.class, () ->
             managerService.saveManager(authUser, todoId, managerSaveRequest)
         );
 
+        // 발생한 예외메세지가 일치하는지 검증
         assertEquals("일정을 생성한 유저만 담당자를 지정할 수 있습니다.", exception.getMessage());
     }
 
